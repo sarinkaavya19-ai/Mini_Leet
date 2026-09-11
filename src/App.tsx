@@ -223,22 +223,14 @@ function Dashboard({ setScreen, setProblem, darkMode }: { setScreen: (s: Screen)
   const text = darkMode ? "#e6edf3" : "#1f2328";
   const muted = darkMode ? "#8b949e" : "#6b7280";
   const hover = darkMode ? "#1f2937" : "#f3f4f6";
-  const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [difficultyFilter, setDifficultyFilter] = useState<string>("All");
-
+  
   const totalSolved = PROBLEMS.filter((p) => p.solved).length;
   const easySolved = PROBLEMS.filter((p) => p.difficulty === "Easy" && p.solved).length;
   const easyTotal = PROBLEMS.filter((p) => p.difficulty === "Easy").length;
   const mediumSolved = PROBLEMS.filter((p) => p.difficulty === "Medium" && p.solved).length;
   const hardSolved = PROBLEMS.filter((p) => p.difficulty === "Hard" && p.solved).length;
 
-  const filtered = PROBLEMS.filter((p) => {
-    const matchSearch = p.title.toLowerCase().includes(search.toLowerCase());
-    const matchCat = !activeCategory || p.categories.some((c) => c.toLowerCase().includes(activeCategory.toLowerCase()));
-    const matchDiff = difficultyFilter === "All" || p.difficulty === difficultyFilter;
-    return matchSearch && matchCat && matchDiff;
-  });
+  const filtered = PROBLEMS;
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 space-y-6">
@@ -294,50 +286,7 @@ function Dashboard({ setScreen, setProblem, darkMode }: { setScreen: (s: Screen)
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="space-y-3">
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="relative flex-1">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: muted }}>🔍</span>
-            <input
-              type="text"
-              placeholder="Search problems..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-1 focus:ring-[#58a6ff] transition-colors border"
-              style={{ background: bg, borderColor: border, color: text }}
-            />
-          </div>
-          <select
-            value={difficultyFilter}
-            onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-colors cursor-pointer border"
-            style={{ background: bg, borderColor: border, color: text }}
-          >
-            <option value="All">All Difficulties</option>
-            <option value="Easy">🟢 Easy</option>
-            <option value="Medium">🟡 Medium</option>
-            <option value="Hard">🔴 Hard</option>
-          </select>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-              className="px-3 py-1 rounded-full text-xs font-medium transition-all border"
-              style={
-                activeCategory === cat
-                  ? { background: "#2d2157", color: "#a371f7", borderColor: "#5a3ea6" }
-                  : { background: bg, color: muted, borderColor: border }
-              }
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </div>
+    
 
       {/* Problem table */}
       <div className="rounded-xl overflow-hidden border" style={{ background: bg, borderColor: border }}>
