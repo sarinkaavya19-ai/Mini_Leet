@@ -496,9 +496,7 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
           {/* Action bar */}
           <div className="h-14 bg-[#161b22] border-t border-[#30363d] flex items-center justify-between px-4 flex-shrink-0">
             <div className="flex gap-2">
-              <button className="px-3 py-1.5 text-xs text-[#8b949e] hover:text-[#e6edf3] border border-[#30363d] rounded-lg transition-colors flex items-center gap-1">
-                <span>+</span> Add Test Case
-              </button>
+
             </div>
             <div className="flex gap-2">
               <button
@@ -622,17 +620,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* Activity heatmap strip */}
-      <div className="bg-[#161b22] border border-[#30363d] rounded-xl p-6">
-        <h2 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-4">Activity — Last 30 Days</h2>
-        <div className="flex gap-1 flex-wrap">
-          {Array.from({ length: 30 }, (_, i) => {
-            const level = Math.random() > 0.6 ? Math.floor(Math.random() * 4) + 1 : 0;
-            const colors = ["bg-[#21262d]", "bg-[#1a3826]", "bg-[#238636]", "bg-[#3fb950]", "bg-[#56d364]"];
-            return <div key={i} className={`w-4 h-4 rounded-sm ${colors[level]}`} title={`Day ${i + 1}`} />;
-          })}
-        </div>
-      </div>
 
       {/* Submissions table */}
       <div className="bg-[#161b22] border border-[#30363d] rounded-xl overflow-hidden">
