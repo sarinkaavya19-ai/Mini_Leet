@@ -55,7 +55,6 @@ const SUBMISSIONS: Submission[] = [
 ];
 
 const CATEGORIES = ["Arrays", "Strings", "Searching", "Sorting", "Linked Lists", "Dynamic Programming", "Sliding Window"];
-
 const CODE_SNIPPET = `def twoSum(nums: list[int], target: int) -> list[int]:
     seen = {}
     for i, num in enumerate(nums):
@@ -64,7 +63,6 @@ const CODE_SNIPPET = `def twoSum(nums: list[int], target: int) -> list[int]:
             return [seen[complement], i]
         seen[num] = i
     return []`;
-
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function DifficultyBadge({ difficulty }: { difficulty: Difficulty }) {
@@ -351,7 +349,7 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
   const text = darkMode ? "#e6edf3" : "#1f2328";
   const muted = darkMode ? "#8b949e" : "#6b7280";
   const [language, setLanguage] = useState("Python");
-  const [code, setCode] = useState(CODE_SNIPPET);
+  const [code, setCode] = useState(CODE_SNIPPET);  
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<"accepted" | "error" | null>(null);
   const [activeTab, setActiveTab] = useState<"output" | "testcases">("output");
@@ -464,15 +462,9 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Editor toolbar */}
           <div className="h-11 bg-[#161b22] border-b border-[#30363d] flex items-center px-4 gap-3 flex-shrink-0">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-[#21262d] border border-[#30363d] rounded px-3 py-1 text-xs text-[#e6edf3] code-font focus:outline-none focus:border-[#58a6ff] transition-colors cursor-pointer"
-            >
-              {["Python", "JavaScript", "Java", "C++"].map((l) => (
-                <option key={l}>{l}</option>
-              ))}
-            </select>
+            <span className="bg-[#21262d] border border-[#30363d] rounded px-3 py-1 text-xs text-[#e6edf3] code-font">
+  Python
+</span>
             <div className="flex-1" />
             <button className="text-[#8b949e] hover:text-[#e6edf3] transition-colors text-sm px-2">⚙</button>
           </div>
