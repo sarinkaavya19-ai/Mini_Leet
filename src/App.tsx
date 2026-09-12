@@ -55,16 +55,17 @@ const SUBMISSIONS: Submission[] = [
 ];
 
 const CATEGORIES = ["Arrays", "Strings", "Searching", "Sorting", "Linked Lists", "Dynamic Programming", "Sliding Window"];
-
-const CODE_SNIPPET = `def twoSum(nums: list[int], target: int) -> list[int]:
-    seen = {}
-    for i, num in enumerate(nums):
-        complement = target - num
-        if complement in seen:
-            return [seen[complement], i]
-        seen[num] = i
-    return []`;
-
+const CODE_SNIPPET = `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> seen = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (seen.containsKey(complement)) return new int[]{seen.get(complement), i};
+            seen.put(nums[i], i);
+        }
+        return new int[]{};
+    }
+}`;
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function DifficultyBadge({ difficulty }: { difficulty: Difficulty }) {
@@ -350,8 +351,8 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
   const subBg = darkMode ? "#0d1117" : "#f6f8fa";
   const text = darkMode ? "#e6edf3" : "#1f2328";
   const muted = darkMode ? "#8b949e" : "#6b7280";
-  const [language, setLanguage] = useState("Python");
-  const [code, setCode] = useState(CODE_SNIPPET);
+  const [language, setLanguage] = useState("Java");
+  const [code, setCode] = useState(CODE_SNIPPET);  
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<"accepted" | "error" | null>(null);
   const [activeTab, setActiveTab] = useState<"output" | "testcases">("output");
@@ -464,15 +465,9 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Editor toolbar */}
           <div className="h-11 bg-[#161b22] border-b border-[#30363d] flex items-center px-4 gap-3 flex-shrink-0">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-[#21262d] border border-[#30363d] rounded px-3 py-1 text-xs text-[#e6edf3] code-font focus:outline-none focus:border-[#58a6ff] transition-colors cursor-pointer"
-            >
-              {["Python", "JavaScript", "Java", "C++"].map((l) => (
-                <option key={l}>{l}</option>
-              ))}
-            </select>
+            <span className="bg-[#21262d] border border-[#30363d] rounded px-3 py-1 text-xs text-[#e6edf3] code-font">
+  Java
+</span>
             <div className="flex-1" />
             <button className="text-[#8b949e] hover:text-[#e6edf3] transition-colors text-sm px-2">⚙</button>
           </div>
@@ -483,11 +478,12 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
               {codeLines.map((line, i) => (
                 <div key={i} className="code-line flex">
                   <span className="w-8 text-right text-[#484f58] select-none mr-4 flex-shrink-0">{i + 1}</span>
-                  <span
+                                    <span
                     className="flex-1 text-[#e6edf3]"
                     style={{ whiteSpace: "pre" }}
-                    dangerouslySetInnerHTML={{ __html: highlightPython(line) }}
-                  />
+                  >
+                    {line}
+                  </span>
                 </div>
               ))}
             </div>
