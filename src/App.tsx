@@ -478,11 +478,12 @@ function Workspace({ problem, setScreen, darkMode }: { problem: Problem; setScre
               {codeLines.map((line, i) => (
                 <div key={i} className="code-line flex">
                   <span className="w-8 text-right text-[#484f58] select-none mr-4 flex-shrink-0">{i + 1}</span>
-                  <span
+                                    <span
                     className="flex-1 text-[#e6edf3]"
                     style={{ whiteSpace: "pre" }}
-                    dangerouslySetInnerHTML={{ __html: highlightPython(line) }}
-                  />
+                  >
+                    {line}
+                  </span>
                 </div>
               ))}
             </div>
